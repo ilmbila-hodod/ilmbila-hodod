@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المجالات التعليمية - علم بلا حدود</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #111;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #ddd;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 35px auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .title h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .title p {
+      color: #666;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      padding: 25px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #111;
+      transition: 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+      border-color: #417505;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .category h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .category p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 50px;
+      background: #111;
+      color: #ddd;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      .title h2 {
+        font-size: 25px;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>علم بلا حدود</h1>
+    <p>المعرفة متاحة للجميع</p>
+  </header>
+
+  <div class="container">
+
+    <a href="index.html" class="back">← العودة إلى الرئيسية</a>
+
+    <div class="title">
+      <h2>المجالات التعليمية</h2>
+      <p>اختر المجال الذي تريد استكشافه</p>
+    </div>
+
+    <div class="categories">
+
+      <a href="#" class="category">
+        <div class="icon">📜</div>
+        <h3>التاريخ</h3>
+        <p>اكتشف أهم الأحداث والحضارات عبر التاريخ.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">💭</div>
+        <h3>الفلسفة</h3>
+        <p>تعرف على الأفكار والفلاسفة والمدارس الفلسفية.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">⚖️</div>
+        <h3>القانون</h3>
+        <p>تعلم المبادئ والمفاهيم القانونية بطريقة مبسطة.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">📊</div>
+        <h3>الاقتصاد</h3>
+        <p>افهم الاقتصاد والأسواق والمفاهيم الاقتصادية.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">🌍</div>
+        <h3>الجغرافيا</h3>
+        <p>اكتشف العالم والدول والمناخ والمجالات الجغرافية.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">👥</div>
+        <h3>علم الاجتماع</h3>
+        <p>تعرف على المجتمع والعلاقات والظواهر الاجتماعية.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">🏛️</div>
+        <h3>العلوم السياسية</h3>
+        <p>تعلم المفاهيم والمؤسسات والأنظمة السياسية.</p>
+      </a>
+
+      <a href="#" class="category">
+        <div class="icon">📚</div>
+        <h3>مجالات أخرى</h3>
+        <p>اكتشف المزيد من المجالات التعليمية مستقبلاً.</p>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 علم بلا حدود - جميع الحقوق محفوظة</p>
+  </footer>
+
+</body>
+</html>
