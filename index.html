@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>علم بلا حدود</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      line-height: 1.7;
+    }
+
+    /* ===== الهيدر ===== */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #555;
+    }
+
+    .login-btn {
+      background: #111;
+      color: white;
+      padding: 9px 17px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* ===== القسم الرئيسي ===== */
+    .hero {
+      background: #ffffff;
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: #222;
+      color: white;
+      padding: 13px 28px;
+      border-radius: 9px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .hero-btn:hover {
+      background: #444;
+    }
+
+    /* ===== البحث ===== */
+    .search-box {
+      max-width: 700px;
+      margin: -25px auto 50px;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 17px 20px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: #555;
+    }
+
+    /* ===== الأقسام ===== */
+    .section {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 20px 20px 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #777;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      padding: 30px 15px;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      border-color: #999;
+    }
+
+    .category-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .category h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .category p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* ===== الدروس ===== */
+    .lessons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .lesson {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .lesson span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .lesson h3 {
+      margin: 10px 0;
+      font-size: 19px;
+    }
+
+    .lesson p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* ===== الاختبارات ===== */
+    .quiz-box {
+      background: #111;
+      color: white;
+      border-radius: 16px;
+      padding: 45px 25px;
+      text-align: center;
+    }
+
+    .quiz-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .quiz-box p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .quiz-btn {
+      display: inline-block;
+      background: white;
+      color: #111;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    /* ===== الفوتر ===== */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer p {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    /* ===== الهاتف ===== */
+    @media (max-width: 800px) {
+
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lessons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- الهيدر -->
+  <header>
+
+    <div class="logo">
+      علم بلا حدود
+    </div>
+
+    <nav>
+      <a href="#">الرئيسية</a>
+      <a href="#">المجالات</a>
+      <a href="#">الدروس</a>
+      <a href="#">الاختبارات</a>
+      <a href="#">من نحن</a>
+      <a href="#" class="login-btn">تسجيل الدخول</a>
+    </nav>
+
+  </header>
+
+
+  <!-- القسم الرئيسي -->
+  <section class="hero">
+
+    <h1>علم بلا حدود</h1>
+
+    <p>
+      اكتشف المعرفة، تعلم، واختبر معلوماتك
+    </p>
+
+    <a href="#" class="hero-btn">
+      ابدأ التعلم
+    </a>
+
+  </section>
+
+
+  <!-- البحث -->
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="ابحث عن درس أو موضوع..."
+    >
+
+  </div>
+
+
+  <!-- المجالات -->
+  <section class="section">
+
+    <div class="section-title">
+      <h2>المجالات التعليمية</h2>
+      <p>اختر المجال الذي تريد استكشافه</p>
+    </div>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="category-icon">📜</div>
+        <h3>التاريخ</h3>
+        <p>اكتشف أهم الأحداث والحضارات</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">💭</div>
+        <h3>الفلسفة</h3>
+        <p>استكشف الأفكار والأسئلة الفلسفية</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">⚖️</div>
+        <h3>القانون</h3>
+        <p>تعرف على المفاهيم القانونية</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">📊</div>
+        <h3>الاقتصاد</h3>
+        <p>افهم أساسيات الاقتصاد</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🌍</div>
+        <h3>الجغرافيا</h3>
+        <p>اكتشف العالم ومناطقه</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">👥</div>
+        <h3>علم الاجتماع</h3>
+        <p>افهم المجتمع والعلاقات الاجتماعية</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🏛️</div>
+        <h3>العلوم السياسية</h3>
+        <p>تعرف على الأنظمة والمؤسسات</p>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">📚</div>
+        <h3>مجالات أخرى</h3>
+        <p>المزيد من المعرفة في المستقبل</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- أحدث الدروس -->
+  <section class="section">
+
+    <div class="section-title">
+      <h2>أحدث الدروس</h2>
+      <p>تعلم شيئًا جديدًا اليوم</p>
+    </div>
+
+    <div class="lessons">
+
+      <div class="lesson">
+        <span>التاريخ</span>
+        <h3>مقدمة في الحضارات القديمة</h3>
+        <p>
+          تعرف على أهم الحضارات القديمة وأبرز إنجازاتها.
+        </p>
+      </div>
+
+      <div class="lesson">
+        <span>الفلسفة</span>
+        <h3>ما هي الفلسفة؟</h3>
+        <p>
+          مقدمة مبسطة لفهم معنى الفلسفة وأهم أسئلتها.
+        </p>
+      </div>
+
+      <div class="lesson">
+        <span>القانون</span>
+        <h3>مقدمة في القانون</h3>
+        <p>
+          تعرف على مفهوم القانون وأهميته في المجتمع.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- الاختبارات -->
+  <section class="section">
+
+    <div class="quiz-box">
+
+      <h2>📝 اختبر معلوماتك</h2>
+
+      <p>
+        هل تعتقد أنك تعرف الكثير؟ جرب أحد اختباراتنا التعليمية.
+      </p>
+
+      <a href="#" class="quiz-btn">
+        ابدأ الاختبار
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- الفوتر -->
+  <footer>
+
+    <p>
+      © 2026 علم بلا حدود — المعرفة للجميع
+    </p>
+
+  </footer>
+
+</body>
+</html>
