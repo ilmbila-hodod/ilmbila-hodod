@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title data-i18n="pageTitle">علم بلا حدود | منصة المعرفة والتعليم</title>
+  <title>علم بلا حدود | منصة المعرفة والتعليم</title>
 
   <meta name="description"
         content="علم بلا حدود - منصة تعليمية لاكتشاف المعرفة وتعلم مختلف المجالات واختبار معلوماتك.">
@@ -108,12 +108,6 @@
       box-shadow: 0 7px 18px rgba(0,0,0,0.14);
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
     nav {
       display: flex;
       align-items: center;
@@ -170,57 +164,6 @@
     .nav-login:hover {
       transform: translateY(-2px);
       background: #292929;
-    }
-
-
-    /* =====================================
-       LANGUAGE SWITCHER
-    ===================================== */
-
-    .language-switcher {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-
-      padding: 4px;
-
-      background: #f3f3f3;
-
-      border: 1px solid #e5e5e5;
-
-      border-radius: 10px;
-
-      flex-shrink: 0;
-    }
-
-    .language-switcher button {
-      border: none;
-
-      background: transparent;
-
-      color: #777;
-
-      cursor: pointer;
-
-      padding: 6px 8px;
-
-      border-radius: 7px;
-
-      font-size: 10px;
-
-      font-weight: 800;
-
-      transition: 0.25s ease;
-    }
-
-    .language-switcher button:hover {
-      color: #111;
-    }
-
-    .language-switcher button.active {
-      background: #111;
-
-      color: white;
     }
 
 
@@ -1084,10 +1027,6 @@
         gap: 15px;
       }
 
-      .header-right {
-        gap: 12px;
-      }
-
       .categories {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1121,20 +1060,6 @@
         gap: 13px;
       }
 
-      .header-right {
-        width: 100%;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        gap: 10px;
-      }
-
       nav {
         width: 100%;
 
@@ -1151,16 +1076,6 @@
 
       .nav-login {
         padding: 7px 13px;
-      }
-
-      .language-switcher {
-        margin-top: 1px;
-      }
-
-      .language-switcher button {
-        padding: 5px 8px;
-
-        font-size: 9px;
       }
 
       .hero {
@@ -1298,60 +1213,156 @@
 
       <span class="logo-mark">ع</span>
 
-      <span data-i18n="siteName">
-        علم بلا حدود
-      </span>
+      علم بلا حدود
 
     </a>
 
 
-    <div class="header-right">
+    <nav>
 
-      <nav>
+      <a href="#">
+        الرئيسية
+      </a>
 
-        <a href="#" data-i18n="home">
-          الرئيسية
+      <a href="categories.html">
+        المجالات
+      </a>
+
+      <a href="#lessons">
+        الدروس
+      </a>
+
+      <a href="#quizzes">
+        الاختبارات
+      </a>
+
+      <a href="#">
+        من نحن
+      </a>
+
+      <a href="#" class="nav-login">
+        تسجيل الدخول
+      </a>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =====================================
+       HERO
+  ===================================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        منصة تعليمية مفتوحة للجميع
+      </div>
+
+      <h1>
+        المعرفة بلا <span>حدود</span>
+      </h1>
+
+      <p class="hero-description">
+        اكتشف التاريخ والفلسفة والقانون والاقتصاد والجغرافيا
+        وغيرها من المجالات، من خلال محتوى مبسط يساعدك على
+        التعلم واكتشاف أفكار جديدة.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#categories" class="primary-btn">
+          ابدأ رحلة التعلم
+          &nbsp; ←
         </a>
 
-        <a href="categories.html" data-i18n="categories">
-          المجالات
+        <a href="categories.html" class="secondary-btn">
+          استكشف المجالات
         </a>
 
-        <a href="#lessons" data-i18n="lessons">
-          الدروس
-        </a>
+      </div>
 
-        <a href="#quizzes" data-i18n="quizzes">
-          الاختبارات
-        </a>
+    </div>
 
-        <a href="#" data-i18n="about">
-          من نحن
-        </a>
-
-        <a href="#" class="nav-login" data-i18n="login">
-          تسجيل الدخول
-        </a>
-
-      </nav>
+  </section>
 
 
-      <!-- LANGUAGE SWITCHER -->
 
-      <div class="language-switcher">
+  <!-- =====================================
+       STATS
+  ===================================== -->
 
-        <button
-          type="button"
-          data-lang="ar"
-          class="active">
-          AR
-        </button>
+  <div class="stats">
 
-        <button
-          type="button"
-          data-lang="fr">
-          FR
-        </button>
+    <div class="stats-box">
 
-        <button
-  
+      <div class="stat">
+
+        <strong>7+</strong>
+
+        <span>
+          مجالات معرفية
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>∞</strong>
+
+        <span>
+          فرص للتعلم
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>100%</strong>
+
+        <span>
+          محتوى تعليمي
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================
+       SEARCH
+  ===================================== -->
+
+  <section class="search-section">
+
+    <h2>
+      ماذا تريد أن تتعلم اليوم؟
+    </h2>
+
+    <div class="search-wrapper">
+
+      <span class="search-icon">
+        🔎
+      </span>
+
+      <input
+        type="text"
+        placeholder="ابحث عن درس، موضوع أو مجال..."
+      >
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================
+       CATEGORIES
