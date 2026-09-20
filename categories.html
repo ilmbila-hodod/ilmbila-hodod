@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>المجالات التعليمية - علم بلا حدود</title>
 
   <style>
@@ -12,119 +13,330 @@
       padding: 0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #111;
-      line-height: 1.7;
+    :root {
+      --black: #111111;
+      --dark: #1b1b1b;
+      --green: #417505;
+      --green-light: #eef5e8;
+      --gray: #666;
+      --light: #f5f6f8;
+      --white: #ffffff;
+      --border: #e8e8e8;
     }
 
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light);
+      color: var(--black);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-      background: #111;
+      background: rgba(17, 17, 17, 0.98);
       color: white;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: -130px;
+      left: -80px;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+      bottom: -120px;
+      right: -60px;
     }
 
     header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: 0.2px;
     }
 
     header p {
-      color: #ddd;
+      position: relative;
+      z-index: 2;
+      color: #cfcfcf;
+      font-size: 14px;
     }
+
+    /* =========================
+       CONTAINER
+    ========================= */
 
     .container {
       width: 92%;
-      max-width: 1100px;
-      margin: 35px auto;
+      max-width: 1150px;
+      margin: 35px auto 55px;
     }
 
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
     .back {
-      display: inline-block;
-      margin-bottom: 25px;
-      color: #111;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      color: var(--black);
       text-decoration: none;
+      font-size: 14px;
       font-weight: bold;
+      transition: 0.3s ease;
     }
 
     .back:hover {
-      text-decoration: underline;
+      color: var(--green);
+      transform: translateX(4px);
     }
+
+    /* =========================
+       TITLE
+    ========================= */
 
     .title {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 42px;
+    }
+
+    .title .small-title {
+      display: inline-block;
+      color: var(--green);
+      background: var(--green-light);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 14px;
     }
 
     .title h2 {
-      font-size: 30px;
-      margin-bottom: 8px;
+      font-size: 34px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .title h2 span {
+      color: var(--green);
     }
 
     .title p {
-      color: #666;
+      color: var(--gray);
+      font-size: 15px;
     }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
     }
 
+    /* =========================
+       CATEGORY CARD
+    ========================= */
+
     .category {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      padding: 25px 20px;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 22px 26px;
       text-align: center;
       text-decoration: none;
-      color: #111;
-      transition: 0.3s;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      color: var(--black);
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.035);
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .category::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: 0.35s ease;
     }
 
     .category:hover {
-      transform: translateY(-5px);
-      border-color: #417505;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      border-color: rgba(65,117,5,0.35);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.09);
     }
 
-    .icon {
-      font-size: 38px;
-      margin-bottom: 12px;
+    .category:hover::before {
+      transform: scaleX(1);
     }
+
+    /* =========================
+       ICON
+    ========================= */
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      margin-bottom: 18px;
+      transition: 0.35s ease;
+    }
+
+    .category:hover .icon {
+      background: var(--green-light);
+      transform: scale(1.08);
+    }
+
+    /* =========================
+       TEXT
+    ========================= */
 
     .category h3 {
       font-size: 20px;
       margin-bottom: 8px;
+      font-weight: 700;
     }
 
     .category p {
-      color: #666;
+      color: var(--gray);
       font-size: 14px;
+      line-height: 1.8;
+      max-width: 230px;
     }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      margin-top: 50px;
-      background: #111;
-      color: #ddd;
+      background: var(--black);
+      color: #aaa;
       text-align: center;
-      padding: 20px;
+      padding: 24px 15px;
+      font-size: 13px;
+      margin-top: 20px;
     }
 
+    footer p {
+      margin: 0;
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 950px) {
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
+
+      header {
+        padding: 22px 15px;
+      }
+
       header h1 {
-        font-size: 24px;
+        font-size: 25px;
+      }
+
+      header p {
+        font-size: 13px;
+      }
+
+      .container {
+        width: 90%;
+        margin-top: 28px;
+      }
+
+      .back {
+        margin-bottom: 25px;
+      }
+
+      .title {
+        margin-bottom: 30px;
       }
 
       .title h2 {
-        font-size: 25px;
+        font-size: 27px;
+      }
+
+      .title p {
+        font-size: 14px;
       }
 
       .categories {
         grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .category {
+        min-height: auto;
+        padding: 26px 20px;
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        font-size: 31px;
+        margin-bottom: 15px;
+      }
+
+      .category h3 {
+        font-size: 19px;
+      }
+
+      .category p {
+        font-size: 13px;
       }
     }
   </style>
@@ -142,8 +354,9 @@
     <a href="index.html" class="back">← العودة إلى الرئيسية</a>
 
     <div class="title">
-      <h2>المجالات التعليمية</h2>
-      <p>اختر المجال الذي تريد استكشافه</p>
+      <div class="small-title">اكتشف المعرفة</div>
+      <h2>استكشف <span>المجالات التعليمية</span></h2>
+      <p>اختر المجال الذي يثير اهتمامك وابدأ رحلة التعلم</p>
     </div>
 
     <div class="categories">
@@ -155,9 +368,9 @@
       </a>
 
       <a href="https://ilmbila-hodod.github.io/ilmbila-hodod/philosophy.html" class="category">
-  <div class="icon">💭</div>
-  <h3>الفلسفة</h3>
-  <p>تعرف على الأفكار والفلاسفة والمدارس الفلسفية.</p>
+        <div class="icon">💭</div>
+        <h3>الفلسفة</h3>
+        <p>تعرف على الأفكار والفلاسفة والمدارس الفلسفية.</p>
       </a>
 
       <a href="#" class="category">
