@@ -3,101 +3,370 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>التاريخ | علم بلا حدود</title>
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #111111;
+      --dark: #1b1b1b;
+      --green: #417505;
+      --green-light: #eef5e8;
+      --gray: #666;
+      --light: #f5f6f8;
+      --white: #ffffff;
+      --border: #e8e8e8;
     }
 
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      background: var(--light);
+      color: var(--black);
+      line-height: 1.7;
+      min-height: 100vh;
     }
 
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-      background: #111;
+      background: rgba(17, 17, 17, 0.98);
       color: white;
-      padding: 25px 20px;
+      padding: 30px 20px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--green);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border: 1px solid rgba(65,117,5,0.25);
+      border-radius: 50%;
+      top: -140px;
+      left: -80px;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(65,117,5,0.18);
+      border-radius: 50%;
+      bottom: -130px;
+      right: -60px;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 30px;
+      position: relative;
+      z-index: 2;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 7px;
     }
 
     header p {
-      margin: 10px 0 0;
-      color: #ccc;
+      position: relative;
+      z-index: 2;
+      color: #cfcfcf;
+      font-size: 14px;
     }
+
+    /* =========================
+       CONTAINER
+    ========================= */
 
     .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 20px;
+      width: 92%;
+      max-width: 1100px;
+      margin: 35px auto 55px;
     }
 
+    /* =========================
+       INTRO
+    ========================= */
+
     .intro {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 38px 30px;
+      margin-bottom: 38px;
       text-align: center;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.04);
+    }
+
+    .intro::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 4px;
+      background: var(--green);
+    }
+
+    .intro .intro-label {
+      display: inline-block;
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid rgba(65,117,5,0.12);
+      padding: 6px 15px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
     .intro h2 {
-      margin-top: 0;
+      font-size: 29px;
+      margin-bottom: 12px;
+      color: var(--green);
     }
+
+    .intro p {
+      color: var(--gray);
+      max-width: 750px;
+      margin: auto;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    /* =========================
+       LESSONS
+    ========================= */
 
     .lessons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
+    /* =========================
+       LESSON CARD
+    ========================= */
+
     .lesson {
-      background: white;
-      padding: 22px;
-      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      padding: 28px 23px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
       text-decoration: none;
-      color: #222;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      transition: 0.3s;
+      color: var(--black);
+      min-height: 225px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.035);
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .lesson::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: 0.35s ease;
     }
 
     .lesson:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transform: translateY(-8px);
+      border-color: rgba(65,117,5,0.35);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.09);
     }
 
+    .lesson:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* =========================
+       LESSON ICON
+    ========================= */
+
+    .lesson-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 17px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      margin-bottom: 17px;
+      transition: 0.35s ease;
+    }
+
+    .lesson:hover .lesson-icon {
+      background: #e4f0da;
+      transform: scale(1.08);
+    }
+
+    /* =========================
+       LESSON TEXT
+    ========================= */
+
     .lesson h3 {
-      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 9px;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    .lesson:hover h3 {
+      color: var(--green);
     }
 
     .lesson p {
-      color: #666;
-      line-height: 1.7;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .lesson-arrow {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-wrapper {
+      text-align: center;
+      margin-top: 38px;
     }
 
     .back {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 22px;
-      background: #111;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--black);
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px solid var(--black);
+      transition: 0.3s ease;
     }
 
+    .back:hover {
+      background: var(--green);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
-      margin-top: 50px;
-      background: #111;
-      color: #ccc;
+      background: var(--black);
+      color: #aaa;
       text-align: center;
-      padding: 20px;
+      padding: 24px 15px;
+      font-size: 13px;
+      border-top: 3px solid var(--green);
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 900px) {
+      .lessons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 24px 15px;
+      }
+
+      header h1 {
+        font-size: 27px;
+      }
+
+      header p {
+        font-size: 13px;
+      }
+
+      .container {
+        width: 90%;
+        margin-top: 28px;
+      }
+
+      .intro {
+        padding: 30px 20px;
+        border-radius: 19px;
+        margin-bottom: 28px;
+      }
+
+      .intro h2 {
+        font-size: 24px;
+      }
+
+      .intro p {
+        font-size: 14px;
+      }
+
+      .lessons {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .lesson {
+        min-height: auto;
+        padding: 25px 20px;
+      }
+
+      .lesson h3 {
+        font-size: 19px;
+      }
+
+      .lesson p {
+        font-size: 13px;
+      }
+
+      .back-wrapper {
+        margin-top: 30px;
+      }
+
+      .back {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -112,7 +381,10 @@
   <main class="container">
 
     <section class="intro">
+      <div class="intro-label">اكتشف الماضي</div>
+
       <h2>تعلم التاريخ بطريقة بسيطة</h2>
+
       <p>
         في هذا القسم ستجد دروسًا ومعلومات تاريخية مبسطة
         تساعدك على فهم أهم الأحداث والشخصيات والحضارات عبر العصور.
@@ -122,45 +394,59 @@
     <section class="lessons">
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">🏺</div>
         <h3>الحضارات القديمة</h3>
         <p>تعرف على أبرز الحضارات التي ساهمت في بناء التاريخ الإنساني.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">☪️</div>
         <h3>التاريخ الإسلامي</h3>
         <p>استكشف أهم المراحل والأحداث في التاريخ الإسلامي.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">🇲🇦</div>
         <h3>تاريخ المغرب</h3>
         <p>تعرف على تاريخ المغرب وأهم المراحل التي مر بها.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">🏛️</div>
         <h3>التاريخ الأوروبي</h3>
         <p>نظرة مبسطة على أهم الأحداث والتحولات في أوروبا.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">⚔️</div>
         <h3>الحروب والصراعات</h3>
         <p>فهم أسباب وأحداث وتأثير أهم الحروب عبر التاريخ.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
       <a href="#" class="lesson">
+        <div class="lesson-icon">👤</div>
         <h3>الشخصيات التاريخية</h3>
         <p>تعرف على شخصيات كان لها تأثير في مسار التاريخ.</p>
+        <span class="lesson-arrow">استكشف الدرس ←</span>
       </a>
 
     </section>
 
-    <a href="categories.html" class="back">
-      العودة إلى المجالات
-    </a>
+    <div class="back-wrapper">
+      <a href="categories.html" class="back">
+        ← العودة إلى المجالات
+      </a>
+    </div>
 
   </main>
 
   <footer>
-    <p>© علم بلا حدود - جميع الحقوق محفوظة</p>
+    <p>© 2026 علم بلا حدود - جميع الحقوق محفوظة</p>
   </footer>
 
 </body>
