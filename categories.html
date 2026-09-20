@@ -43,6 +43,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      border-bottom: 3px solid var(--green);
     }
 
     header::before {
@@ -50,7 +51,7 @@
       position: absolute;
       width: 220px;
       height: 220px;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(65,117,5,0.25);
       border-radius: 50%;
       top: -130px;
       left: -80px;
@@ -61,7 +62,7 @@
       position: absolute;
       width: 180px;
       height: 180px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(65,117,5,0.18);
       border-radius: 50%;
       bottom: -120px;
       right: -60px;
@@ -127,6 +128,7 @@
       display: inline-block;
       color: var(--green);
       background: var(--green-light);
+      border: 1px solid rgba(65,117,5,0.12);
       padding: 6px 14px;
       border-radius: 30px;
       font-size: 13px;
@@ -139,6 +141,11 @@
       line-height: 1.4;
       margin-bottom: 10px;
       font-weight: 700;
+    }
+
+    /* استكشف + المجالات التعليمية بالأخضر */
+    .title h2 {
+      color: var(--green);
     }
 
     .title h2 span {
@@ -217,7 +224,8 @@
       width: 70px;
       height: 70px;
       border-radius: 20px;
-      background: var(--light);
+      background: var(--green-light);
+      border: 1px solid rgba(65,117,5,0.10);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -227,8 +235,9 @@
     }
 
     .category:hover .icon {
-      background: var(--green-light);
+      background: #e4f0da;
       transform: scale(1.08);
+      border-color: rgba(65,117,5,0.20);
     }
 
     /* =========================
@@ -239,6 +248,11 @@
       font-size: 20px;
       margin-bottom: 8px;
       font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    .category:hover h3 {
+      color: var(--green);
     }
 
     .category p {
@@ -259,6 +273,7 @@
       padding: 24px 15px;
       font-size: 13px;
       margin-top: 20px;
+      border-top: 3px solid var(--green);
     }
 
     footer p {
