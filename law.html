@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>القانون | علم بلا حدود</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #111111;
+      --dark: #1b1b1b;
+      --green: #417505;
+      --green-light: #eef5e8;
+      --gray: #666;
+      --light: #f5f6f8;
+      --white: #ffffff;
+      --border: #e8e8e8;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--light);
+      color: var(--black);
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      padding: 45px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--green);
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border: 1px solid rgba(65,117,5,0.25);
+      border-radius: 50%;
+    }
+
+    header::before {
+      top: -70px;
+      right: -40px;
+    }
+
+    header::after {
+      bottom: -90px;
+      left: -50px;
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    header p {
+      position: relative;
+      z-index: 2;
+      margin: 12px 0 0;
+      color: #d0d0d0;
+      font-size: 16px;
+    }
+
+    /* Main */
+    .container {
+      max-width: 1100px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    /* Intro */
+    .intro {
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      padding: 35px 30px;
+      border-radius: 16px;
+      margin-bottom: 35px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    .intro::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 4px;
+      background: var(--green);
+    }
+
+    .intro-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: var(--green-light);
+      color: var(--green);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .intro h2 {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 28px;
+    }
+
+    .intro p {
+      max-width: 780px;
+      margin: auto;
+      color: var(--gray);
+      line-height: 1.9;
+      font-size: 16px;
+    }
+
+    /* Lessons */
+    .lessons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .lesson {
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      padding: 28px 24px;
+      border-radius: 15px;
+      text-decoration: none;
+      color: var(--black);
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+      transition: 0.3s ease;
+    }
+
+    .lesson::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: 0.3s ease;
+    }
+
+    .lesson:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.09);
+      border-color: #dfe8d8;
+    }
+
+    .lesson:hover::before {
+      transform: scaleX(1);
+    }
+
+    .lesson-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      background: var(--green-light);
+      color: var(--green);
+      border-radius: 12px;
+      font-size: 24px;
+    }
+
+    .lesson h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      transition: 0.3s ease;
+    }
+
+    .lesson:hover h3 {
+      color: var(--green);
+    }
+
+    .lesson p {
+      margin: 0;
+      color: var(--gray);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .lesson-link {
+      display: block;
+      margin-top: 18px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* Back button */
+    .back-wrapper {
+      text-align: center;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 38px;
+      padding: 13px 25px;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 9px;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+
+    .back:hover {
+      background: var(--green);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 70px;
+      background: var(--black);
+      color: #ccc;
+      text-align: center;
+      padding: 25px 20px;
+      border-top: 3px solid var(--green);
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .lessons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 35px 15px;
+      }
+
+      header h1 {
+        font-size: 30px;
+      }
+
+      header p {
+        font-size: 14px;
+      }
+
+      .container {
+        margin: 30px auto;
+        padding: 0 15px;
+      }
+
+      .intro {
+        padding: 30px 20px;
+      }
+
+      .intro h2 {
+        font-size: 24px;
+      }
+
+      .lessons {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .lesson {
+        padding: 24px 20px;
+      }
+    }
+  </style></head><body>  <header>
+    <h1>القانون</h1>
+    <p>اكتشف القواعد والمبادئ التي تنظم المجتمع وتحمي الحقوق</p>
+  </header>  <main class="container"><section class="intro">
+  <span class="intro-label">اكتشف عالم القانون</span>
+
+  <h2>تعلم القانون بطريقة بسيطة</h2>
+
+  <p>
+    تعرف على أهم فروع القانون والمفاهيم القانونية الأساسية
+    بطريقة مبسطة ومنظمة تساعدك على فهم القواعد التي تنظم المجتمع.
+  </p>
+</section>
+
+<section class="lessons">
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">⚖️</div>
+    <h3>مدخل إلى القانون</h3>
+    <p>
+      تعرف على مفهوم القانون ومصادره وأهميته ودوره في تنظيم المجتمع.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">📜</div>
+    <h3>القانون الدستوري</h3>
+    <p>
+      تعرف على الدستور والسلطات العامة والحقوق والحريات الأساسية.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">🏛️</div>
+    <h3>القانون المدني</h3>
+    <p>
+      اكتشف القواعد المتعلقة بالأشخاص والحقوق والالتزامات والعقود.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">🔒</div>
+    <h3>القانون الجنائي</h3>
+    <p>
+      تعرف على الجريمة والعقوبة والمسؤولية الجنائية وأهم المبادئ المرتبطة بها.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">🏢</div>
+    <h3>القانون الإداري</h3>
+    <p>
+      تعرف على الإدارة العامة والقرارات الإدارية وعلاقتها بالأفراد.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+  <a href="#" class="lesson">
+    <div class="lesson-icon">🌍</div>
+    <h3>القانون الدولي</h3>
+    <p>
+      اكتشف القواعد التي تنظم العلاقات بين الدول والمنظمات والمجتمع الدولي.
+    </p>
+    <span class="lesson-link">استكشف الدرس ←</span>
+  </a>
+
+</section>
+
+<div class="back-wrapper">
+  <a href="categories.html" class="back">
+    العودة إلى المجالات
+  </a>
+</div>
+
+  </main>  <footer>
+    <p>© 2026 علم بلا حدود - جميع الحقوق محفوظة</p>
+  </footer></body>
+</html>
