@@ -764,25 +764,47 @@
       try {
 
         const {
-          data,
-          error
-        } = await supabaseClient.auth.signUp({
+  data,
+  error
+} = await supabaseClient.auth.signUp({
 
-          email: email,
+  email: email,
 
-          password: password,
+  password: password,
 
-          options: {
+  options: {
 
-            data: {
+    emailRedirectTo:
+      "https://ilmbila-hodod.github.io/ilmbila-hodod/index.html",
 
-              full_name: fullName
+    data: {
 
-            }
+      full_name: fullName
 
-          }
+    }
 
-        });
+  }
+
+});
+          
+          
+        
+
+          
+
+          
+
+          
+
+            
+
+              
+
+            
+
+          
+
+        
 
 
         if (error) {
