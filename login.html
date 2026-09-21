@@ -16,6 +16,7 @@
       --light: #f5f6f8;
       --white: #ffffff;
       --border: #e4e4e4;
+      --red: #c62828;
     }
 
     * {
@@ -241,6 +242,36 @@
       box-shadow: 0 12px 25px rgba(65,117,5,0.25);
     }
 
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .message.success {
+      display: block;
+      background: #eef8e8;
+      color: #356504;
+      border: 1px solid #d5e9c8;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: var(--red);
+      border: 1px solid #f2cccc;
+    }
+
     .bottom-text {
       text-align: center;
       margin-top: 20px;
@@ -265,6 +296,7 @@
       color: #777;
       font-size: 13px;
       transition: 0.3s;
+      text-decoration: none;
     }
 
     .home-link:hover {
@@ -276,7 +308,6 @@
     }
 
     @media (max-width: 500px) {
-
       body {
         padding: 18px 12px;
       }
@@ -328,8 +359,14 @@
 
       </div>
 
+      <!-- الرسائل -->
 
-      <!-- تسجيل الدخول -->
+      <div id="message" class="message"></div>
+
+
+      <!-- =========================
+           تسجيل الدخول
+      ========================== -->
 
       <div id="loginForm" class="form-box">
 
@@ -341,23 +378,22 @@
 
         <div class="field">
 
-          <label>الاسم الكامل</label>
+          <label>البريد الإلكتروني</label>
 
           <div class="input-box">
 
-            <span>👤</span>
+            <span>✉️</span>
 
             <input
-              type="text"
-              id="loginFullName"
-              placeholder="أدخل اسمك الكامل"
-              autocomplete="name"
+              type="email"
+              id="loginEmail"
+              placeholder="example@email.com"
+              autocomplete="email"
             >
 
           </div>
 
         </div>
-
 
         <div class="field">
 
@@ -378,28 +414,36 @@
 
         </div>
 
-
         <div class="options">
 
           <label class="remember">
 
-            <input type="checkbox">
+            <input
+              type="checkbox"
+              id="rememberMe"
+            >
 
             تذكرني
 
           </label>
 
-          <span class="forgot">
+          <span
+            class="forgot"
+            onclick="forgotPassword()"
+          >
             نسيت كلمة المرور؟
           </span>
 
         </div>
 
-
-        <button class="submit-btn" type="button">
+        <button
+          class="submit-btn"
+          id="loginButton"
+          type="button"
+          onclick="loginUser()"
+        >
           تسجيل الدخول
         </button>
-
 
         <div class="bottom-text">
 
@@ -414,7 +458,9 @@
       </div>
 
 
-      <!-- إنشاء الحساب -->
+      <!-- =========================
+           إنشاء الحساب
+      ========================== -->
 
       <div id="signupForm" class="form-box hidden">
 
@@ -423,7 +469,6 @@
         <p class="form-subtitle">
           أنشئ حسابك وابدأ رحلة التعلم
         </p>
-
 
         <div class="field">
 
@@ -444,7 +489,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label>البريد الإلكتروني</label>
@@ -463,7 +507,6 @@
           </div>
 
         </div>
-
 
         <div class="field">
 
@@ -484,7 +527,6 @@
 
         </div>
 
-
         <div class="field">
 
           <label>تأكيد كلمة المرور</label>
@@ -504,11 +546,14 @@
 
         </div>
 
-
-        <button class="submit-btn" type="button">
+        <button
+          class="submit-btn"
+          id="signupButton"
+          type="button"
+          onclick="signupUser()"
+        >
           إنشاء الحساب
         </button>
-
 
         <div class="bottom-text">
 
@@ -524,7 +569,6 @@
 
     </section>
 
-
     <a href="index.html" class="home-link">
       ← العودة إلى الصفحة الرئيسية
     </a>
@@ -532,34 +576,539 @@
   </main>
 
 
+  <!-- Supabase -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
   <script>
+
+    /* ==========================================
+       إعداد Supabase
+    ========================================== */
+
+    const SUPABASE_URL =
+      "https://lvmbkswqnarxhsjzsvnk.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_Tb5oOzrsw4UnnS649Mrd8A_9n4mEqmB";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /* ==========================================
+       تبديل النماذج
+    ========================================== */
 
     function showLogin() {
 
-      document.getElementById("loginForm").classList.remove("hidden");
+      document
+        .getElementById("loginForm")
+        .classList.remove("hidden");
 
-      document.getElementById("signupForm").classList.add("hidden");
+      document
+        .getElementById("signupForm")
+        .classList.add("hidden");
 
-      document.getElementById("loginTab").classList.add("active");
+      document
+        .getElementById("loginTab")
+        .classList.add("active");
 
-      document.getElementById("signupTab").classList.remove("active");
+      document
+        .getElementById("signupTab")
+        .classList.remove("active");
 
+      clearMessage();
     }
 
 
     function showSignup() {
 
-      document.getElementById("signupForm").classList.remove("hidden");
+      document
+        .getElementById("signupForm")
+        .classList.remove("hidden");
 
-      document.getElementById("loginForm").classList.add("hidden");
+      document
+        .getElementById("loginForm")
+        .classList.add("hidden");
 
-      document.getElementById("signupTab").classList.add("active");
+      document
+        .getElementById("signupTab")
+        .classList.add("active");
 
-      document.getElementById("loginTab").classList.remove("active");
+      document
+        .getElementById("loginTab")
+        .classList.remove("active");
+
+      clearMessage();
+    }
+
+
+    /* ==========================================
+       الرسائل
+    ========================================== */
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+    }
+
+
+    function clearMessage() {
+
+      const message =
+        document.getElementById("message");
+
+      message.textContent = "";
+
+      message.className = "message";
+    }
+
+
+    /* ==========================================
+       إنشاء حساب
+    ========================================== */
+
+    async function signupUser() {
+
+      clearMessage();
+
+      const fullName =
+        document
+          .getElementById("fullName")
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("password")
+          .value;
+
+      const confirmPassword =
+        document
+          .getElementById("confirmPassword")
+          .value;
+
+      const button =
+        document.getElementById("signupButton");
+
+
+      /* التحقق من البيانات */
+
+      if (!fullName) {
+
+        showMessage(
+          "يرجى إدخال الاسم الكامل.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (!email) {
+
+        showMessage(
+          "يرجى إدخال البريد الإلكتروني.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        showMessage(
+          "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (password !== confirmPassword) {
+
+        showMessage(
+          "كلمتا المرور غير متطابقتين.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      /* تعطيل الزر أثناء العملية */
+
+      button.disabled = true;
+      button.textContent = "جاري إنشاء الحساب...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.auth.signUp({
+
+          email: email,
+
+          password: password,
+
+          options: {
+
+            data: {
+
+              full_name: fullName
+
+            }
+
+          }
+
+        });
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        /*
+          إذا كان تأكيد البريد الإلكتروني مفعلاً
+          فلن تكون هناك جلسة مباشرة.
+        */
+
+        if (!data.session) {
+
+          showMessage(
+            "تم إنشاء الحساب بنجاح. تحقق من بريدك الإلكتروني لتأكيد الحساب.",
+            "success"
+          );
+
+        } else {
+
+          showMessage(
+            "تم إنشاء حسابك بنجاح! سيتم تحويلك الآن...",
+            "success"
+          );
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "index.html";
+
+          }, 1200);
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          getArabicError(error.message),
+          "error"
+        );
+
+      } finally {
+
+        button.disabled = false;
+        button.textContent = "إنشاء الحساب";
+
+      }
 
     }
+
+
+    /* ==========================================
+       تسجيل الدخول
+    ========================================== */
+
+    async function loginUser() {
+
+      clearMessage();
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      const button =
+        document.getElementById("loginButton");
+
+
+      if (!email) {
+
+        showMessage(
+          "يرجى إدخال البريد الإلكتروني.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (!password) {
+
+        showMessage(
+          "يرجى إدخال كلمة المرور.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      button.disabled = true;
+      button.textContent = "جاري تسجيل الدخول...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.auth
+          .signInWithPassword({
+
+            email: email,
+
+            password: password
+
+          });
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        showMessage(
+          "تم تسجيل الدخول بنجاح! 👋",
+          "success"
+        );
+
+
+        setTimeout(() => {
+
+          window.location.href =
+            "index.html";
+
+        }, 1000);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          getArabicError(error.message),
+          "error"
+        );
+
+      } finally {
+
+        button.disabled = false;
+        button.textContent = "تسجيل الدخول";
+
+      }
+
+    }
+
+
+    /* ==========================================
+       نسيت كلمة المرور
+    ========================================== */
+
+    async function forgotPassword() {
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+
+      if (!email) {
+
+        showMessage(
+          "أدخل بريدك الإلكتروني أولاً، ثم اضغط على «نسيت كلمة المرور؟».",
+          "error"
+        );
+
+        return;
+      }
+
+
+      try {
+
+        const {
+          error
+        } = await supabaseClient.auth
+          .resetPasswordForEmail(email, {
+
+            redirectTo:
+              window.location.origin +
+              window.location.pathname
+
+          });
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        showMessage(
+          "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.",
+          "success"
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          getArabicError(error.message),
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================
+       ترجمة بعض رسائل Supabase
+    ========================================== */
+
+    function getArabicError(message) {
+
+      if (!message) {
+
+        return "حدث خطأ غير متوقع. حاول مرة أخرى.";
+
+      }
+
+
+      const text =
+        message.toLowerCase();
+
+
+      if (
+        text.includes("invalid login credentials")
+      ) {
+
+        return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+
+      }
+
+
+      if (
+        text.includes("user already registered")
+      ) {
+
+        return "هذا البريد الإلكتروني مسجل بالفعل. حاول تسجيل الدخول.";
+
+      }
+
+
+      if (
+        text.includes("password should be at least")
+      ) {
+
+        return "كلمة المرور قصيرة جدًا.";
+
+      }
+
+
+      if (
+        text.includes("email not confirmed")
+      ) {
+
+        return "يرجى تأكيد بريدك الإلكتروني أولاً.";
+
+      }
+
+
+      if (
+        text.includes("rate limit")
+      ) {
+
+        return "تم تجاوز عدد المحاولات. حاول مرة أخرى بعد قليل.";
+
+      }
+
+
+      return "حدث خطأ: " + message;
+
+    }
+
+
+    /* ==========================================
+       السماح بالضغط على Enter
+    ========================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key !== "Enter") {
+          return;
+        }
+
+
+        const loginVisible =
+          !document
+            .getElementById("loginForm")
+            .classList.contains("hidden");
+
+
+        if (loginVisible) {
+
+          loginUser();
+
+        } else {
+
+          signupUser();
+
+        }
+
+      }
+    );
 
   </script>
 
 </body>
-</html>
+  </html>
