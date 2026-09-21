@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>تسجيل الدخول | علم بلا حدود</title>
+
+  <style>
+    :root {
+      --black: #111111;
+      --dark: #1b1b1b;
+      --green: #417505;
+      --green-light: #eef5e8;
+      --gray: #777;
+      --light: #f5f6f8;
+      --white: #ffffff;
+      --border: #e4e4e4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(65,117,5,0.08), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(65,117,5,0.07), transparent 30%),
+        var(--light);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 15px;
+      overflow-x: hidden;
+    }
+
+    .auth-page {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .brand h1 {
+      font-size: 30px;
+      color: var(--green);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .brand p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .auth-card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 35px 30px;
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(65,117,5,0.07);
+      top: -100px;
+      right: -80px;
+    }
+
+    .auth-card::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(65,117,5,0.05);
+      bottom: -90px;
+      left: -70px;
+    }
+
+    .switch {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #f0f1f2;
+      border-radius: 14px;
+      padding: 5px;
+      margin-bottom: 30px;
+    }
+
+    .switch button {
+      border: none;
+      background: transparent;
+      padding: 12px 8px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+      color: #777;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .switch button.active {
+      background: var(--green);
+      color: white;
+      box-shadow: 0 5px 15px rgba(65,117,5,0.22);
+    }
+
+    .form-box {
+      position: relative;
+      z-index: 2;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box span {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 17px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 50px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: #fafafa;
+      padding: 0 45px 0 14px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .input-box input:focus {
+      border-color: var(--green);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(65,117,5,0.08);
+    }
+
+    .input-box input::placeholder {
+      color: #aaa;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 3px 0 20px;
+      font-size: 13px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .remember input {
+      accent-color: var(--green);
+    }
+
+    .forgot {
+      color: var(--green);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: var(--green);
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(65,117,5,0.18);
+    }
+
+    .submit-btn:hover {
+      background: #345f04;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(65,117,5,0.25);
+    }
+
+    .bottom-text {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .bottom-text button {
+      border: none;
+      background: none;
+      color: var(--green);
+      font-family: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .home-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #777;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .home-link:hover {
+      color: var(--green);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+
+      body {
+        padding: 18px 12px;
+      }
+
+      .brand h1 {
+        font-size: 26px;
+      }
+
+      .auth-card {
+        padding: 25px 20px;
+        border-radius: 23px;
+      }
+
+      .form-box h2 {
+        font-size: 25px;
+      }
+
+      .switch button {
+        font-size: 14px;
+      }
+
+      .options {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <div class="brand">
+      <h1>علم بلا حدود</h1>
+      <p>تعلم، اكتشف، ووسّع معرفتك</p>
+    </div>
+
+    <section class="auth-card">
+
+      <div class="switch">
+
+        <button id="loginTab" class="active" onclick="showLogin()">
+          تسجيل الدخول
+        </button>
+
+        <button id="signupTab" onclick="showSignup()">
+          إنشاء حساب
+        </button>
+
+      </div>
+
+
+      <!-- تسجيل الدخول -->
+
+      <div id="loginForm" class="form-box">
+
+        <h2>مرحبًا بعودتك</h2>
+
+        <p class="form-subtitle">
+          سجّل الدخول للوصول إلى حسابك
+        </p>
+
+        <div class="field">
+
+          <label>الاسم الكامل</label>
+
+          <div class="input-box">
+
+            <span>👤</span>
+
+            <input
+              type="text"
+              id="loginFullName"
+              placeholder="أدخل اسمك الكامل"
+              autocomplete="name"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>كلمة المرور</label>
+
+          <div class="input-box">
+
+            <span>🔒</span>
+
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="أدخل كلمة المرور"
+              autocomplete="current-password"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="options">
+
+          <label class="remember">
+
+            <input type="checkbox">
+
+            تذكرني
+
+          </label>
+
+          <span class="forgot">
+            نسيت كلمة المرور؟
+          </span>
+
+        </div>
+
+
+        <button class="submit-btn" type="button">
+          تسجيل الدخول
+        </button>
+
+
+        <div class="bottom-text">
+
+          ليس لديك حساب؟
+
+          <button onclick="showSignup()">
+            إنشاء حساب
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- إنشاء الحساب -->
+
+      <div id="signupForm" class="form-box hidden">
+
+        <h2>إنشاء حساب</h2>
+
+        <p class="form-subtitle">
+          أنشئ حسابك وابدأ رحلة التعلم
+        </p>
+
+
+        <div class="field">
+
+          <label>الاسم الكامل</label>
+
+          <div class="input-box">
+
+            <span>👤</span>
+
+            <input
+              type="text"
+              id="fullName"
+              placeholder="أدخل اسمك الكامل"
+              autocomplete="name"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>البريد الإلكتروني</label>
+
+          <div class="input-box">
+
+            <span>✉️</span>
+
+            <input
+              type="email"
+              id="email"
+              placeholder="example@email.com"
+              autocomplete="email"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>كلمة المرور</label>
+
+          <div class="input-box">
+
+            <span>🔒</span>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="أنشئ كلمة مرور قوية"
+              autocomplete="new-password"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>تأكيد كلمة المرور</label>
+
+          <div class="input-box">
+
+            <span>🔐</span>
+
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="أعد كتابة كلمة المرور"
+              autocomplete="new-password"
+            >
+
+          </div>
+
+        </div>
+
+
+        <button class="submit-btn" type="button">
+          إنشاء الحساب
+        </button>
+
+
+        <div class="bottom-text">
+
+          لديك حساب بالفعل؟
+
+          <button onclick="showLogin()">
+            تسجيل الدخول
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <a href="index.html" class="home-link">
+      ← العودة إلى الصفحة الرئيسية
+    </a>
+
+  </main>
+
+
+  <script>
+
+    function showLogin() {
+
+      document.getElementById("loginForm").classList.remove("hidden");
+
+      document.getElementById("signupForm").classList.add("hidden");
+
+      document.getElementById("loginTab").classList.add("active");
+
+      document.getElementById("signupTab").classList.remove("active");
+
+    }
+
+
+    function showSignup() {
+
+      document.getElementById("signupForm").classList.remove("hidden");
+
+      document.getElementById("loginForm").classList.add("hidden");
+
+      document.getElementById("signupTab").classList.add("active");
+
+      document.getElementById("loginTab").classList.remove("active");
+
+    }
+
+  </script>
+
+</body>
+</html>
